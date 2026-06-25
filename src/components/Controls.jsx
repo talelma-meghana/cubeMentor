@@ -15,6 +15,8 @@ function Controls({
   handleScramble,
   handleUndo,
   handleRedo,
+  handleClearBest,
+  handleClearStats,
   isMoving,
 }) {
   return (
@@ -52,8 +54,17 @@ function Controls({
       <button onClick={handleRedo} disabled={isMoving}>Redo</button>
 
       <button onClick={handleReset} disabled={isMoving}>Reset</button>
+      <button onClick={handleScramble} disabled={isMoving}>
+      Scramble
+      </button>
 
-      <button onClick={handleScramble} disabled={isMoving}>Scramble</button>
+      <button onClick={handleClearBest}>
+       Reset Best
+      </button>
+
+      <button onClick={handleClearStats}>
+      Clear Stats
+      </button>
     </div>
   );
 }
