@@ -1,72 +1,66 @@
-function Controls({
-  handleR,
-  handleRPrime,
-  handleU,
-  handleUPrime,
-  handleL,
-  handleLPrime,
-  handleF,
-  handleFPrime,
-  handleD,
-  handleDPrime,
-  handleB,
-  handleBPrime,
-  handleReset,
-  handleScramble,
-  handleUndo,
-  handleRedo,
-  handleClearBest,
-  handleClearStats,
-  isMoving,
+/*
+  Controls.jsx
+  Pure UI — receives handlers as props, no logic inside.
+*/
+
+const BTN = {
+  padding: "6px 12px",
+  borderRadius: "6px",
+  border: "none",
+  background: "#444",
+  color: "#fff",
+  cursor: "pointer",
+  fontSize: "13px",
+};
+
+export default function Controls({
+  moves,
+  onUndo,
+  onRedo,
+  onReset,
+  onScramble,
+  onClearStats,
+  disabled,
 }) {
+  const b = (label, onClick) => (
+    <button style={BTN} onClick={onClick} disabled={disabled}>
+      {label}
+    </button>
+  );
+
   return (
     <div
       style={{
         position: "fixed",
-        top: "20px",
-        left: "20px",
+        top: 16,
+        left: 16,
         zIndex: 9999,
         display: "flex",
-        gap: "8px",
         flexWrap: "wrap",
-        width: "300px",
+        gap: "6px",
+        maxWidth: "520px",
       }}
     >
-      <button onClick={handleR} disabled={isMoving}>R</button>
-      <button onClick={handleRPrime} disabled={isMoving}>R'</button>
+      {/* Face moves */}
+      {b("R",  moves.R)}
+      {b("R′", moves.RPrime)}
+      {b("U",  moves.U)}
+      {b("U′", moves.UPrime)}
+      {b("L",  moves.L)}
+      {b("L′", moves.LPrime)}
+      {b("F",  moves.F)}
+      {b("F′", moves.FPrime)}
+      {b("D",  moves.D)}
+      {b("D′", moves.DPrime)}
+      {b("B",  moves.B)}
+      {b("B′", moves.BPrime)}
 
-      <button onClick={handleU} disabled={isMoving}>U</button>
-      <button onClick={handleUPrime} disabled={isMoving}>U'</button>
-
-      <button onClick={handleL} disabled={isMoving}>L</button>
-      <button onClick={handleLPrime} disabled={isMoving}>L'</button>
-
-      <button onClick={handleF} disabled={isMoving}>F</button>
-      <button onClick={handleFPrime} disabled={isMoving}>F'</button>
-
-      <button onClick={handleD} disabled={isMoving}>D</button>
-      <button onClick={handleDPrime} disabled={isMoving}>D'</button>
-
-      <button onClick={handleB} disabled={isMoving}>B</button>
-      <button onClick={handleBPrime} disabled={isMoving}>B'</button>
-
-      <button onClick={handleUndo} disabled={isMoving}>Undo</button>
-      <button onClick={handleRedo} disabled={isMoving}>Redo</button>
-
-      <button onClick={handleReset} disabled={isMoving}>Reset</button>
-      <button onClick={handleScramble} disabled={isMoving}>
-      Scramble
-      </button>
-
-      <button onClick={handleClearBest}>
-       Reset Best
-      </button>
-
-      <button onClick={handleClearStats}>
-      Clear Stats
-      </button>
+      {/* Actions */}
+      {b("Undo",         onUndo)}
+      {b("Redo",         onRedo)}
+      {b("Reset",        onReset)}
+      {b("Scramble",     onScramble)}
+      {b("Clear Stats",  onClearStats)}
     </div>
   );
 }
-
-export default Controls;
